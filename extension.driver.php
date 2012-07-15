@@ -29,6 +29,11 @@
 					'callback' => 'appendEventFilter'
 				),
 				array(
+					'page' => '/blueprints/events/new/',
+					'delegate' => 'AppendEventFilterDocumentation',
+					'callback' => 'addFilterDocumentationToEvent'
+				),
+				array(
 					'page' => '/frontend/',
 					'delegate' => 'EventPreSaveFilter',
 					'callback' => 'eventPreSaveFilter'
@@ -66,6 +71,37 @@
 					'spam', false, __("The answer to the spam question was found to be incorrect")
 				);
 			}
+		}
+
+		public function addFilterDocumentationToEvent($context) {
+			if (!in_array('spam-question', $context['selected'])) return;
+
+			$context['documentation'][] = new XMLElement('h3', 'Spam Question Filter');
+			$context['documentation'][] = new XMLElement('p', 'Prevents spam by asking the user to answer a simple math question like "2 + 4 = ?".');
+			$context['documentation'][] = new XMLElement('p', 'To use this filter you will have to make some changes to your markup - see the example below for further information:');
+
+			$code = '<!-- You have to add the math extension - otherwise we will not be able to generate the needed random numbers  -->
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:math="http://exslt.org/math"
+	extension-element-prefixes="math">
+
+<!-- Fill the two numbers with random values  -->
+<xsl:param name="num1" select="floor(math:random()*10) + 1"/>
+<xsl:param name="num2" select="floor(math:random()*10) + 1"/>
+
+<!-- Test-Form  -->
+<form method="post" action="" enctype="multipart/form-data">
+	<!-- This is the anti-spam question  -->
+	<xsl:value-of select="$num1"/> plus <xsl:value-of select="$num2"/> equals: <input name="fields[number]" type="text"/>
+
+	<!-- These fields should be hidden so the user won\'t be confused by them  -->
+	<input name="fields[check1]" type="text" value="{$num1}" />
+	<input name="fields[check2]" type="text" value="{$num2}" />
+</form>';
+
+			$context['documentation'][] = contentBlueprintsEvents::processDocumentationCode($code);
+
 		}
 
 	}
