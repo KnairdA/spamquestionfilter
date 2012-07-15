@@ -24,22 +24,22 @@ This can be used as a replacement for other spam prevention methods like captcha
 
 ## Example-Form
 
-<!-- You have to add the math extension - otherwise we will not be able to generate the needed random numbers  -->
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:math="http://exslt.org/math"
-	extension-element-prefixes="math">
+	<!-- You have to add the math extension - otherwise we will not be able to generate the needed random numbers  -->
+	<xsl:stylesheet version="1.0"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		xmlns:math="http://exslt.org/math"
+		extension-element-prefixes="math">
 
-<!-- Fill the two numbers with random values  -->
-<xsl:param name="num1" select="floor(math:random()*10) + 1"/>
-<xsl:param name="num2" select="floor(math:random()*10) + 1"/>
+	<!-- Fill the two numbers with random values  -->
+	<xsl:param name="num1" select="floor(math:random()*10) + 1"/>
+	<xsl:param name="num2" select="floor(math:random()*10) + 1"/>
 
-<!-- Test-Form  -->
-<form method="post" action="" enctype="multipart/form-data">
-<!-- This is the anti-spam question  -->
-	<xsl:value-of select="$num1"/> plus <xsl:value-of select="$num2"/> equals: <input name="fields[number]" type="text"/>
+	<!-- Test-Form  -->
+	<form method="post" action="" enctype="multipart/form-data">
+	<!-- This is the anti-spam question  -->
+		<xsl:value-of select="$num1"/> plus <xsl:value-of select="$num2"/> equals: <input name="fields[number]" type="text"/>
 
-<!-- These fields should be hidden so the user won't be confused by them  -->
-	<input name="fields[check1]" type="text" value="{$num1}" />
-	<input name="fields[check2]" type="text" value="{$num2}" />
-</form>
+	<!-- These fields should be hidden so the user won't be confused by them  -->
+		<input name="fields[check1]" type="text" value="{$num1}" />
+		<input name="fields[check2]" type="text" value="{$num2}" />
+	</form>
