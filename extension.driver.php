@@ -50,26 +50,31 @@
 		}
 
 		public function eventPreSaveFilter(array $context) {
-			if(!in_array('spam-question', $context['event']->eParamFILTERS)) return;
+			if ( in_array('spam-question', $context['event']->eParamFILTERS) ) {
+				$correct_answer = false;
 
-			$correct_answer = false;
-
-			if ( isset($context['fields']['check1']) &&
-			     isset($context['fields']['check2']) &&
-			     isset($context['fields']['number']) )
-			{
-				$result = $context['fields']['check1'] + $context['fields']['check2'];
-
-				if ( $result == $context['fields']['number'] ) 
+				if ( isset($context['fields']['check1']) &&
+					 isset($context['fields']['check2']) &&
+					 isset($context['fields']['number']) )
 				{
-					$correct_answer = true;
-				}
-			}
+					$result = $context['fields']['check1'] + $context['fields']['check2'];
 
-			if(in_array('spam-question', $context['event']->eParamFILTERS) && $correct_answer == false) {
-				$context['messages'][] = array(
-					'spam', false, __("The answer to the spam question was found to be incorrect")
-				);
+					if ( $result == $context['fields']['number'] ) 
+					{
+						$correct_answer = true;
+					}
+				}
+
+				if ( $correct_answer == true ) {
+					$context['messages'][] = array(
+						'spam', true, __("The answer to the spam question was correctly answered - we seem too be dealing with a human.")
+					);
+				}
+				else {
+					$context['messages'][] = array(
+						'spam', false, __("The answer to the spam question was found to be incorrect.")
+					);
+				}
 			}
 		}
 
