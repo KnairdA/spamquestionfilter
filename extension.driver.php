@@ -54,8 +54,8 @@
 				$correct_answer = false;
 
 				if ( isset($context['fields']['check1']) &&
-					 isset($context['fields']['check2']) &&
-					 isset($context['fields']['number']) )
+				     isset($context['fields']['check2']) &&
+				     isset($context['fields']['number']) )
 				{
 					$result = $context['fields']['check1'] + $context['fields']['check2'];
 
@@ -110,3 +110,5 @@
 		}
 
 	}
+
+?>
