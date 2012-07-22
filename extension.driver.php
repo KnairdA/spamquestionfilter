@@ -67,7 +67,7 @@
 
 				if ( $correct_answer == true ) {
 					$context['messages'][] = array(
-						'spam', true, __("The answer to the spam question was correctly answered - we seem too be dealing with a human.")
+						'spam', true, __("The answer to the spam question was correctly answered - we seem to be dealing with a human.")
 					);
 				}
 				else {
