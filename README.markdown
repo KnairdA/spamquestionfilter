@@ -30,6 +30,7 @@ This can be used as a replacement for other spam prevention methods like captcha
 		<xsl:value-of select="events/spamquestion/part1"/> plus <xsl:value-of select="events/spamquestion/part2"/> equals: <input name="fields[number]" type="text"/>
 
 	<!-- These fields should be hidden so the user won't be confused by them  -->
-		<input name="fields[check1]" type="text" value="{events/spamquestion/part1}" />
-		<input name="fields[check2]" type="text" value="{events/spamquestion/part2}" />
+		<input name="fields[check1]" type="text" value="{events/spamquestion/honey1}" />
+		<input name="fields[check2]" type="text" value="{events/spamquestion/honey2}" />
+		<input name="fields[spam]" type="text" value="{events/spamquestion/check}" />
 	</form>
