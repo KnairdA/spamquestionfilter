@@ -57,7 +57,7 @@
 				     isset($context['fields']['number']) )
 				{
 					$decodedCheck = base64_decode( $context['fields']['spam'] );
-					$checkElements = explode( '+', $decodedCheck );
+					$checkElements = explode( '|', $decodedCheck );
 					$result = $checkElements[0] + $checkElements[1];
 
 					if ( $result == $context['fields']['number'] ) 
@@ -91,8 +91,6 @@
     <xsl:value-of select="events/spamquestion/part1"/> plus <xsl:value-of select="events/spamquestion/part2"/> equals: <input name="fields[number]" type="text"/>
 
 <!-- These fields should be hidden so the user won\'t be confused by them  -->
-    <input name="fields[check1]" type="text" value="{events/spamquestion/honey1}" />
-    <input name="fields[check2]" type="text" value="{events/spamquestion/honey2}" />
     <input name="fields[spam]" type="text" value="{events/spamquestion/check}" />
 </form>';
 
