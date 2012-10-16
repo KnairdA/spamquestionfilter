@@ -57,12 +57,22 @@
 				     isset($context['fields']['number']) )
 				{
 					$decodedCheck = base64_decode( $context['fields']['spam'] );
-					$checkElements = explode( '|', $decodedCheck );
-					$result = $checkElements[0] + $checkElements[1];
+					$elements = explode( '|', $decodedCheck );
 
-					if ( $result == $context['fields']['number'] ) 
+					$check1 = $elements[0];
+					$check2 = $elements[1];
+					$userResult = $context['fields']['number'];
+
+					if ( is_numeric($check1) &&
+					     is_numeric($check2) &&
+					     is_numeric($userResult) )
 					{
-						$correct_answer = true;
+						$result = $check1 + $check2;
+
+						if ( $result == $userResult ) 
+						{
+							$correct_answer = true;
+						}
 					}
 				}
 
