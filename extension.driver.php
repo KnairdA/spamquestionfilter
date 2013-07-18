@@ -4,37 +4,37 @@
 
 		public function about() {
 			return array(
-				'name' => 'Spam Question Filter',
-				'version' => '1.0',
+				'name'         => 'Spam Question Filter',
+				'version'      => '1.0',
 				'release-date' => '2012-07-15',
-				'author' => array(
-					'name' => 'Adrian Kummerländer',
-					'website' => 'http://adriank.redirectme.net',
-					'email' => 'adrian.kummerlaender@piraten-konstanz.de'
+				'author'       => array(
+					'name'     => 'Adrian Kummerländer',
+					'website'  => 'http://blog.kummerlaender.eu',
+					'email'    => 'adrian@kummerlaender.eu'
 				),
-				'description' => 'Protect your events against spam using a simple math question'
+				'description'  => 'Protect your events against spam using a simple math question'
 			);
 		}
 
 		public function getSubscribedDelegates() {
 			return array(
 				array(
-					'page' => '/blueprints/events/new/',
+					'page'     => '/blueprints/events/new/',
 					'delegate' => 'AppendEventFilter',
 					'callback' => 'appendEventFilter'
 				),
 				array(
-					'page' => '/blueprints/events/edit/',
+					'page'     => '/blueprints/events/edit/',
 					'delegate' => 'AppendEventFilter',
 					'callback' => 'appendEventFilter'
 				),
 				array(
-					'page' => '/blueprints/events/new/',
+					'page'     => '/blueprints/events/new/',
 					'delegate' => 'AppendEventFilterDocumentation',
 					'callback' => 'addFilterDocumentationToEvent'
 				),
 				array(
-					'page' => '/frontend/',
+					'page'     => '/frontend/',
 					'delegate' => 'EventPreSaveFilter',
 					'callback' => 'eventPreSaveFilter'
 				),
